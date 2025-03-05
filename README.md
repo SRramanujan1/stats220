@@ -6,4 +6,4 @@ This is my repo for stats 220.
 - I am taking stats 220 because I want to learn some new skills, and use it in my future projects.
 - I am interested in learning about more tools to play around with data and get some meaningful outputs.
 
-  
+A meme that captures how I currently feel about my university studies is: ![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
