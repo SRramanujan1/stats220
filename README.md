@@ -23,3 +23,4 @@ Project 1
 
 ![Part E](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTZtdGloaG5haHAwb3hkemxqZ245cWcxMXVqbHRwanU1cWJmenhsMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/u72zG5iGs0ilVhXnIL/giphy.gif)
 
+clean_input <- trimws(gsub("\\n", "", raw_input))
