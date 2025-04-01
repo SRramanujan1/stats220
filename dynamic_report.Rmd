@@ -1,0 +1,80 @@
+---
+title: "My Dynamic Report"
+subtitle: "Analysis of Fashion Preferences Based on Ethnicity, Gender, and Age"
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+## Analysis of Fashion Preferences Based on Ethnicity, Gender, and Age
+
+We are analyzing survey responses to understand the relationship between ethnicity, gender, age, and preferred fashion styles. This analysis aims to provide insights into fashion trends and assist fashion companies in targeting specific demographics effectively.
+
+- Participants can select between **0 and 5** fashion styles.
+- The dataset includes fashion styles commonly seen across New Zealand.
+- Gender-based analysis helps companies market fashion products effectively.
+- Age differentiation identifies target demographics for pricing and marketing strategies.
+
+```{r echo=FALSE}
+library(tidyverse) # Load required package
+
+# Load the dataset from Google Sheets
+logged_data <- read.csv("https://docs.google.com/spreadsheets/d/1x4iimJysyWfFeMIOgnMAUIfruwZYPDv9jDfKIzTJsJA/gviz/tq?tqx=out:csv&gid=209278632")
+
+# Clean and rename columns for better readability
+latest_data <- logged_data %>%
+  rename(
+    Timestamp = Timestamp,
+    Age = What.s.your.age...we.know.its.just.a.number.,
+    Ethnicity = What.s.your.ethnicity..,
+    Gender = What.s.your.gender.,
+    Style = What.s.your.style..,
+    Style_Count = How.many.styles.did.you.choose.
+  )
+
+# Summary statistics for style preferences
+max_style <- max(latest_data$Style_Count, na.rm = TRUE)
+min_style <- min(latest_data$Style_Count, na.rm = TRUE)
+mean_style <- mean(latest_data$Style_Count, na.rm = TRUE)
+```
+
+## Summary Statistics
+
+- **Maximum number of styles chosen:** `r max_style`
+- **Minimum number of styles chosen:** `r min_style`
+- **Average number of styles chosen:** `r round(mean_style, 2)`
+
+## Bar Charts
+
+### Distribution of Fashion Styles Chosen
+```{r echo=FALSE}
+library(ggplot2)
+ggplot(latest_data, aes(x = as.factor(Style_Count))) +
+  geom_bar(fill = "blue") +
+  labs(title = "Distribution of Fashion Styles Chosen", x = "Number of Styles", y = "Count")
+```
+
+### Fashion Styles by Gender
+```{r echo=FALSE}
+ggplot(latest_data, aes(x = Gender, fill = as.factor(Style_Count))) +
+  geom_bar(position = "dodge") +
+  labs(title = "Fashion Style Preferences by Gender", x = "Gender", y = "Count", fill = "Number of Styles")
+```
+
+## Dynamic Insights
+
+- `r paste0("On average, people choose about ", round(mean_style, 2), " different fashion styles.")`
+- `r paste0("The most styles chosen by a single person is ", max_style, " while the least is ", min_style, ".")`
+
+## Custom Styling
+
+```{css}
+body {
+  font-family: Arial, sans-serif;
+}
+h2 {
+  color: #003366;
+}
+```
